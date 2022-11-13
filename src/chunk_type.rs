@@ -6,7 +6,7 @@ use std::{
 use crate::{Error, Result};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub(crate) struct ChunkType {
+pub struct ChunkType {
     bytes: [u8; 4],
 }
 
@@ -25,7 +25,7 @@ impl Display for ChunkTypeError {
     }
 }
 impl ChunkType {
-    fn bytes(&self) -> [u8; 4] {
+    pub fn bytes(&self) -> [u8; 4] {
         self.bytes
     }
     pub fn is_critical(&self) -> bool {
