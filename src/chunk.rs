@@ -51,8 +51,8 @@ impl Chunk {
         }
     }
     /// The length of the data portion of this chunk.
-    pub fn length(&self) -> u32 {
-        self.chunk_data.len() as u32
+    pub fn length(&self) -> usize {
+        self.chunk_data.len()
     }
 
     /// The `ChunkType` of this chunk
@@ -93,7 +93,7 @@ impl Chunk {
     /// 3. The data itself *(`length` bytes)*
     /// 4. The CRC of the chunk type and data *(4 bytes)*
     pub fn as_bytes(&self) -> Vec<u8> {
-        let len = self.chunk_data.len().to_be_bytes();
+        let len = (self.chunk_data.len() as u32).to_be_bytes();
         let chunk_type_bytes = self.chunk_type.bytes();
         let crc_checksum_bytes = self.crc().to_be_bytes();
         let bytes: Vec<u8> = len
